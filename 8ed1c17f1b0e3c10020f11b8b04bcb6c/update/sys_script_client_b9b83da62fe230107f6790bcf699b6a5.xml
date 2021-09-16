@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description>Atleast one data export must be selected.</description>
+        <field>audit_logs_checkpoint</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Validate export data</name>
+        <order/>
+        <script><![CDATA[function onSubmit() {
+  
+	if(g_form.getValue('export_cmdb_tables') == "false" && g_form.getValue('export_audit_logs') == "false" && g_form.getValue('export_users')== "false"){
+		
+		g_form.addErrorMessage("Atleast one data export should be selected");
+		return false;
+		
+	}
+   
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-15 09:28:38</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>b9b83da62fe230107f6790bcf699b6a5</sys_id>
+        <sys_mod_count>17</sys_mod_count>
+        <sys_name>Validate export data</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_update_name>sys_script_client_b9b83da62fe230107f6790bcf699b6a5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-15 11:30:51</sys_updated_on>
+        <table>x_cdsp_chr_data_ex_configuration</table>
+        <type>onSubmit</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>

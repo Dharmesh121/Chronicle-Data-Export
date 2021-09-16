@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description>Support Contact Page</description>
+        <direct>false</direct>
+        <endpoint>x_cdsp_chr_data_ex_support_contact.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<div style="font-size: 15px; width:700px; margin: 50px auto; text-align: center;" >
+		<p style="text-align: center;">
+			<img src="chronicle_itsm_logo.png" alt="Chronicle Logo" width="500" height="90"/>
+		</p>
+		<h2 style="text-align: center;">
+			<strong>Support Contact</strong>
+		</h2>
+		<span><strong>Contact Details: &#160;</strong></span><a style="width: 600px; margin: 0 auto;" align="center" rel="noopener noreferrer nofollow" href = "https://go.chronicle.security/contact" target="_blank" onClick="return confirm('You will be redirected to an external website. Continue?')">https://go.chronicle.security/contact</a>
+
+	</div>
+</j:jelly>]]></html>
+        <name>support_contact</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-13 06:24:28</sys_created_on>
+        <sys_id>91fc3ebd2f6230107f6790bcf699b60c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>support_contact</sys_name>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_update_name>sys_ui_page_91fc3ebd2f6230107f6790bcf699b60c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-13 06:24:28</sys_updated_on>
+    </sys_ui_page>
+</record_update>

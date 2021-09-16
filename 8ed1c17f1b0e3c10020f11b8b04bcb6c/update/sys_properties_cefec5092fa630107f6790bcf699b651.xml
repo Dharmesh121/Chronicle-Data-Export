@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>The maximum records to be sent in each API call to the Chronicle platform (Default Value: 100)</description>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_cdsp_chr_data_ex.max_records_per_api_call</name>
+        <read_roles>x_cdsp_chr_data_ex.admin</read_roles>
+        <suffix>max_records_per_api_call</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-10 14:28:44</sys_created_on>
+        <sys_id>cefec5092fa630107f6790bcf699b651</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>x_cdsp_chr_data_ex.max_records_per_api_call</sys_name>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_update_name>sys_properties_cefec5092fa630107f6790bcf699b651</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-13 03:51:50</sys_updated_on>
+        <type>integer</type>
+        <value>100</value>
+        <write_roles>x_cdsp_chr_data_ex.admin</write_roles>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=cefec5092fa630107f6790bcf699b651"/>
+</record_update>

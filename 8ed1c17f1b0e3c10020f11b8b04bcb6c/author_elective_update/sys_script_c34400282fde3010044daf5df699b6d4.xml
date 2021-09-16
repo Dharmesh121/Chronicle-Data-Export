@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="DELETE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_cdsp_chr_data_ex_data_export_configuration</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Set Configuration Script</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+
+	// Add your code here
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-08-27 09:30:34</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>c34400282fde3010044daf5df699b6d4</sys_id>
+        <sys_mod_count>26</sys_mod_count>
+        <sys_name>Set Configuration Script</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_update_name>sys_script_c34400282fde3010044daf5df699b6d4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-01 06:40:16</sys_updated_on>
+        <template>script=try{&#13;
+	var grConfig = new GlideRecord('x_cdsp_chr_data_ex_data_export_configuration');&#13;
+&#13;
+	var baseURL = current.getValue('base_url').trim();&#13;
+	var customerID = current.getValue('customer_id').trim();&#13;
+	&#13;
+	// Get The Initial Data Export Time&#13;
+	var checkpoint = new ChronicleUtils().getInitialExportTime(current);&#13;
+&#13;
+	//Export CMDB Data&#13;
+	if (current.export_cmdb_tables) {&#13;
+		var cmdbExport = new ChronicleExportCMDB();&#13;
+		cmdbExport.exportCMDBtables(baseURL, customerID, checkpoint.cmdbCheckpoint);&#13;
+	}&#13;
+	&#13;
+	// Export Audit Logs&#13;
+	if (current.export_audit_logs) {&#13;
+		var auditLogsExport = new ChronicleExportAuditLogs();&#13;
+		auditLogsExport.exportAuditLogs(baseURL, customerID, checkpoint.auditLogsCheckpoint);&#13;
+	}&#13;
+	&#13;
+	// Export Users(with Groups &amp; Roles)&#13;
+	if (current.export_users) {&#13;
+		var usersExport = new ChronicleExportUsers();&#13;
+		usersExport.exportUsers(baseURL, customerID, checkpoint.usersCheckpoint);&#13;
+	}&#13;
+}&#13;
+catch(ex){&#13;
+	gs.error("[Scheduled script execution] Exception: "+ex);&#13;
+}^EQ</template>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="DELETE" query="documentkey=c34400282fde3010044daf5df699b6d4"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</application>
+        <file_path/>
+        <instance_id>9e948971dbd94c908aea21c4059619c0</instance_id>
+        <instance_name>dev95225</instance_name>
+        <name>sys_script_c34400282fde3010044daf5df699b6d4</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_script"&gt;&lt;sys_script action="INSERT_OR_UPDATE"&gt;&lt;abort_action&gt;false&lt;/abort_action&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;action_delete&gt;false&lt;/action_delete&gt;&lt;action_insert&gt;true&lt;/action_insert&gt;&lt;action_query&gt;false&lt;/action_query&gt;&lt;action_update&gt;false&lt;/action_update&gt;&lt;active&gt;true&lt;/active&gt;&lt;add_message&gt;false&lt;/add_message&gt;&lt;advanced&gt;true&lt;/advanced&gt;&lt;change_fields&gt;false&lt;/change_fields&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;collection&gt;x_cdsp_chr_data_ex_data_export_configuration&lt;/collection&gt;&lt;condition/&gt;&lt;description/&gt;&lt;execute_function&gt;false&lt;/execute_function&gt;&lt;filter_condition/&gt;&lt;is_rest&gt;false&lt;/is_rest&gt;&lt;message/&gt;&lt;name&gt;Set Configuration Script&lt;/name&gt;&lt;order&gt;100&lt;/order&gt;&lt;priority&gt;100&lt;/priority&gt;&lt;rest_method/&gt;&lt;rest_method_text/&gt;&lt;rest_service/&gt;&lt;rest_service_text/&gt;&lt;rest_variables/&gt;&lt;role_conditions/&gt;&lt;script&gt;&lt;![CDATA[(function executeRule(current, previous /*null when async*/) {
+
+	// Add your code here
+
+})(current, previous);]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-08-27 09:30:34&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;c34400282fde3010044daf5df699b6d4&lt;/sys_id&gt;&lt;sys_mod_count&gt;26&lt;/sys_mod_count&gt;&lt;sys_name&gt;Set Configuration Script&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex"&gt;8ed1c17f1b0e3c10020f11b8b04bcb6c&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Chronicle Data Export App"&gt;8ed1c17f1b0e3c10020f11b8b04bcb6c&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_c34400282fde3010044daf5df699b6d4&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-09-01 06:40:16&lt;/sys_updated_on&gt;&lt;template&gt;script=try{&amp;#13;
+	var grConfig = new GlideRecord('x_cdsp_chr_data_ex_data_export_configuration');&amp;#13;
+&amp;#13;
+	var baseURL = current.getValue('base_url').trim();&amp;#13;
+	var customerID = current.getValue('customer_id').trim();&amp;#13;
+	&amp;#13;
+	// Get The Initial Data Export Time&amp;#13;
+	var checkpoint = new ChronicleUtils().getInitialExportTime(current);&amp;#13;
+&amp;#13;
+	//Export CMDB Data&amp;#13;
+	if (current.export_cmdb_tables) {&amp;#13;
+		var cmdbExport = new ChronicleExportCMDB();&amp;#13;
+		cmdbExport.exportCMDBtables(baseURL, customerID, checkpoint.cmdbCheckpoint);&amp;#13;
+	}&amp;#13;
+	&amp;#13;
+	// Export Audit Logs&amp;#13;
+	if (current.export_audit_logs) {&amp;#13;
+		var auditLogsExport = new ChronicleExportAuditLogs();&amp;#13;
+		auditLogsExport.exportAuditLogs(baseURL, customerID, checkpoint.auditLogsCheckpoint);&amp;#13;
+	}&amp;#13;
+	&amp;#13;
+	// Export Users(with Groups &amp;amp; Roles)&amp;#13;
+	if (current.export_users) {&amp;#13;
+		var usersExport = new ChronicleExportUsers();&amp;#13;
+		usersExport.exportUsers(baseURL, customerID, checkpoint.usersCheckpoint);&amp;#13;
+	}&amp;#13;
+}&amp;#13;
+catch(ex){&amp;#13;
+	gs.error("[Scheduled script execution] Exception: "+ex);&amp;#13;
+}^EQ&lt;/template&gt;&lt;when&gt;before&lt;/when&gt;&lt;/sys_script&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=c34400282fde3010044daf5df699b6d4"/&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1135697958</payload_hash>
+        <record_name>Set Configuration Script</record_name>
+        <reverted_from/>
+        <source>df01dd502f6630107f6790bcf699b61e</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-08 06:41:40</sys_created_on>
+        <sys_id>b91151902f6630107f6790bcf699b6ef</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17bc42405990000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-08 06:41:40</sys_updated_on>
+        <type>Business Rule</type>
+        <update_guid>d5adc942ce9e7010a6fdeaa88acdc4ee</update_guid>
+        <update_guid_history>d5adc942ce9e7010a6fdeaa88acdc4ee:-1135697958,3e4901ce435e701044f7eb310432163b:-192537767,9d68858e775e7010ad2dd0840a7dbba6:278103595,71307f99d0d23010ac0e6bb3841f9f80:1214625969,0fd8a795abd23010cbce8fe874a9fb4c:-841103353,0dc8679506d230107830ad89bf8baa39:-858036276,fb2367914dd23010e2d6b1bad9571ac5:1961921128,7ec2ef51d5d230102d17bc6c6fd94a9d:-479008793,0e10afddb7923010d90b8fdeee289ca1:1961921128,ce3fd7dd7592301080ec65bd7bb34a90:-199582467,ebcc1f5d999230108909b99a26a17fbf:-314501855,44d75f59b192301050e752dd001de9ba:1063962208,93a7be158a523010056b6d7bd0761a19:41920725,dc84b2d1da5230108b76bcd1047d41c2:361460512,6904b291525230105f3c9e35e60da437:-547267131,8f93f211d752301006b2e5c08294a818:-357610303,da42b65137523010da9a76dd9271c945:-1539502316,c5227a51c3523010f480c933dd16d036:1865665182,8b2a661d13123010b91d6830a4ea9f11:1917417728,3f99eed9f7123010cbdd1beea5369357:1101977425,f74c446c7bde3010f8fa8fce701f29fe:1726632346,cd2c806817de3010c86c44ea31026cfe:-176491224,72cb006c4fde3010defa5266f7e70443:-1293186298,11958c2867de30103a94e26161026637:709625104,d3554c288dde3010ad4f1fdb1b2477dd:-1374574762,eaf44420d6de301039a37cd878a69246:1481310535,c7a4042824de30101517cf98257ec594:-1704300025</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-10 08:04:44</sys_created_on>
+        <sys_db_object display_value="" name="sys_script">sys_script</sys_db_object>
+        <sys_id>20acd96ac0fa4425a9e5820235f94cb9</sys_id>
+        <sys_metadata>c34400282fde3010044daf5df699b6d4</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Set Configuration Script</sys_name>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_parent display_value="">16c43dbf1b4630108074ed74604bcb3c</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_scope_delete display_value="">006152519b904b9480023041154796a9</sys_scope_delete>
+        <sys_update_name>sys_script_c34400282fde3010044daf5df699b6d4</sys_update_name>
+        <sys_update_version display_value="sys_script_c34400282fde3010044daf5df699b6d4">b91151902f6630107f6790bcf699b6ef</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-10 08:04:44</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

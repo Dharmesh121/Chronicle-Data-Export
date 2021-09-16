@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module">
+    <sys_app_module action="DELETE">
+        <active>true</active>
+        <application display_value="Chronicle Data Export App">7e457dbf1b4630108074ed74604bcb8d</application>
+        <assessment/>
+        <device_type/>
+        <filter/>
+        <hint/>
+        <homepage/>
+        <image/>
+        <link_type>DETAIL</link_type>
+        <map_page/>
+        <mobile_title>Data Export Configurations</mobile_title>
+        <mobile_view_name>Mobile</mobile_view_name>
+        <name>x_cdsp_chr_data_ex_data_export_configuration</name>
+        <order>100</order>
+        <override_menu_roles>false</override_menu_roles>
+        <query>javascript:gs.getProperty('x_cdsp_chr_data_ex.sys_id')</query>
+        <report/>
+        <roles>x_cdsp_chr_data_ex.data_export_configuration_user</roles>
+        <sys_class_name>sys_app_module</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-08-25 09:47:10</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>f2457dbf1b4630108074ed74604bcb90</sys_id>
+        <sys_mod_count>18</sys_mod_count>
+        <sys_name>Configurations (old)</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_update_name>sys_app_module_f2457dbf1b4630108074ed74604bcb90</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-08 06:44:56</sys_updated_on>
+        <timeline_page/>
+        <title>Configurations (old)</title>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+        <window_name/>
+    </sys_app_module>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</application>
+        <file_path/>
+        <instance_id>9e948971dbd94c908aea21c4059619c0</instance_id>
+        <instance_name>dev95225</instance_name>
+        <name>sys_app_module_f2457dbf1b4630108074ed74604bcb90</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module"><sys_app_module action="INSERT_OR_UPDATE"><active>true</active><application display_value="Chronicle Data Export App">7e457dbf1b4630108074ed74604bcb8d</application><assessment/><device_type/><filter/><hint/><homepage/><image/><link_type>DETAIL</link_type><map_page/><mobile_title>Data Export Configurations</mobile_title><mobile_view_name>Mobile</mobile_view_name><name>x_cdsp_chr_data_ex_data_export_configuration</name><order>100</order><override_menu_roles>false</override_menu_roles><query>javascript:gs.getProperty('x_cdsp_chr_data_ex.sys_id')</query><report/><roles>x_cdsp_chr_data_ex.data_export_configuration_user</roles><sys_class_name>sys_app_module</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2021-08-25 09:47:10</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>f2457dbf1b4630108074ed74604bcb90</sys_id><sys_mod_count>18</sys_mod_count><sys_name>Configurations (old)</sys_name><sys_overrides/><sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package><sys_policy/><sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope><sys_update_name>sys_app_module_f2457dbf1b4630108074ed74604bcb90</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2021-09-08 06:44:56</sys_updated_on><timeline_page/><title>Configurations (old)</title><uncancelable>false</uncancelable><view_name/><window_name/></sys_app_module></record_update>]]></payload>
+        <payload_hash>1577730707</payload_hash>
+        <record_name>Configurations (old)</record_name>
+        <reverted_from/>
+        <source>9a3195902f6630107f6790bcf699b671</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-08 06:44:56</sys_created_on>
+        <sys_id>f5d195902f6630107f6790bcf699b64d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17bc42705b20000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-08 06:44:56</sys_updated_on>
+        <type>Module</type>
+        <update_guid>31d195908066301010fca1e0972a9b4d</update_guid>
+        <update_guid_history>31d195908066301010fca1e0972a9b4d:1577730707,5bc5b1da665ab010ff45872de8cfff6c:-265696025,d0a5bd1e6d5ab01047c676a3e9e3ae49:-839285928,d375bd1e225ab010f89afc75152e381a:-763076166,5bb7f8a84d5270105e8d0b13404bdfe4:-265696025,5e9778a82f527010a416b7881f2b3dc9:982572730,7d77f0a88152701084298aaa6ed1bbf2:-1735146229,4047b0a8b052701034a2624e6f33e80d:982572730,d476f468055270102f33d9fe392e756f:-1735146229,7d0bc39cbe1e301018bb3f0893a562dc:-839285928,e39803c8b71670107fb09ac12c9f508e:-1735146229,ab6c2eb3cc0a3010a90e4958529aa575:190885151,353b66b3d10a301024b0baf7b9e779d6:-318332296,1c1b66b3510a3010a356373041e40c9b:962593408,6e7a22b3190a3010d7ffc71d4f858584:-318332296,6e2aaa73610a3010c6bd88adf07f6350:962593408,4d16eebfedc63010c13d87b63d63cd0f:1333332177,1fa422bfe2c6301009ba2fc70e4037ac:-318332296,ba457dbf444630101dff35fc16601e91:634944355</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Configurations (old)">2547373c2fa230107f6790bcf699b67f</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-10 08:04:41</sys_created_on>
+        <sys_db_object display_value="" name="sys_app_module">sys_app_module</sys_db_object>
+        <sys_id>bd9b15241800464c8b19bf54ea19e264</sys_id>
+        <sys_metadata>f2457dbf1b4630108074ed74604bcb90</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Configurations (old)</sys_name>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_scope_delete display_value="">006152519b904b9480023041154796a9</sys_scope_delete>
+        <sys_update_name>sys_app_module_f2457dbf1b4630108074ed74604bcb90</sys_update_name>
+        <sys_update_version display_value="sys_app_module_f2457dbf1b4630108074ed74604bcb90">f5d195902f6630107f6790bcf699b64d</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-10 08:04:41</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

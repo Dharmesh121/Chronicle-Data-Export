@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="DELETE">
+        <active>true</active>
+        <admin_overrides>false</admin_overrides>
+        <advanced>true</advanced>
+        <condition/>
+        <description>Default access control on x_cdsp_chr_data_ex_data_export_configuration</description>
+        <name>x_cdsp_chr_data_ex_data_export_configuration</name>
+        <operation display_value="delete">delete</operation>
+        <script><![CDATA[answer = false;]]></script>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-08-25 09:47:10</sys_created_on>
+        <sys_id>3a4535ff1b4630108074ed74604bcbb3</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>x_cdsp_chr_data_ex_data_export_configuration</sys_name>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_update_name>sys_security_acl_3a4535ff1b4630108074ed74604bcbb3</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-08-30 11:24:58</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</application>
+        <file_path/>
+        <instance_id>9e948971dbd94c908aea21c4059619c0</instance_id>
+        <instance_name>dev95225</instance_name>
+        <name>sys_security_acl_3a4535ff1b4630108074ed74604bcbb3</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_security_acl"&gt;&lt;sys_security_acl action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;admin_overrides&gt;false&lt;/admin_overrides&gt;&lt;advanced&gt;true&lt;/advanced&gt;&lt;condition/&gt;&lt;description&gt;Default access control on x_cdsp_chr_data_ex_data_export_configuration&lt;/description&gt;&lt;name&gt;x_cdsp_chr_data_ex_data_export_configuration&lt;/name&gt;&lt;operation display_value="delete"&gt;delete&lt;/operation&gt;&lt;script&gt;&lt;![CDATA[answer = false;]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_security_acl&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-08-25 09:47:10&lt;/sys_created_on&gt;&lt;sys_id&gt;3a4535ff1b4630108074ed74604bcbb3&lt;/sys_id&gt;&lt;sys_mod_count&gt;3&lt;/sys_mod_count&gt;&lt;sys_name&gt;x_cdsp_chr_data_ex_data_export_configuration&lt;/sys_name&gt;&lt;sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex"&gt;8ed1c17f1b0e3c10020f11b8b04bcb6c&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Chronicle Data Export App"&gt;8ed1c17f1b0e3c10020f11b8b04bcb6c&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_security_acl_3a4535ff1b4630108074ed74604bcbb3&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-08-30 11:24:58&lt;/sys_updated_on&gt;&lt;type display_value="record"&gt;record&lt;/type&gt;&lt;/sys_security_acl&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1921651985</payload_hash>
+        <record_name>x_cdsp_chr_data_ex_data_export_configuration</record_name>
+        <reverted_from/>
+        <source>df01dd502f6630107f6790bcf699b61e</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-08 06:41:41</sys_created_on>
+        <sys_id>4a1191902f6630107f6790bcf699b637</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17bc42408bd0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-08 06:41:41</sys_updated_on>
+        <type>Access Control</type>
+        <update_guid>44ab3f918a163010d81bfe92bcba0acb</update_guid>
+        <update_guid_history>44ab3f918a163010d81bfe92bcba0acb:-1921651985,f73b3791e11630103c04613f031152e7:-1095054048,fb15f82810527010d0a522753166b817:-1921651985,7a4535ff6f46301019c94817b8a8f8b5:933751791</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-10 08:04:40</sys_created_on>
+        <sys_db_object display_value="" name="sys_security_acl">sys_security_acl</sys_db_object>
+        <sys_id>7abc790cf1f74fb487baa7f570b32fe1</sys_id>
+        <sys_metadata>3a4535ff1b4630108074ed74604bcbb3</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_cdsp_chr_data_ex_data_export_configuration</sys_name>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_parent display_value="">364535ff1b4630108074ed74604bcbb9</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_scope_delete display_value="">006152519b904b9480023041154796a9</sys_scope_delete>
+        <sys_update_name>sys_security_acl_3a4535ff1b4630108074ed74604bcbb3</sys_update_name>
+        <sys_update_version display_value="sys_security_acl_3a4535ff1b4630108074ed74604bcbb3">4a1191902f6630107f6790bcf699b637</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-10 08:04:40</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

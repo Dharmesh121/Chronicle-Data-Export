@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <entered_time/>
+        <name>Validation Report Run</name>
+        <offset/>
+        <offset_type>0</offset_type>
+        <run_as display_value="System Administrator">6816f79cc0a8016401c5a33be04be441</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek/>
+        <run_period/>
+        <run_start>2021-09-13 04:06:27</run_start>
+        <run_time/>
+        <run_type>once</run_type>
+        <script><![CDATA[var S="8ed1c17f1b0e3c10020f11b8b04bcb6c",g=new GlideRecord("sys_metadata");g.addQuery("sys_scope",S),g.addQuery("sys_class_name", "!=", "sys_metadata_delete"),g.query();for(var f=[],s=new GlideRecordXMLSerializer;g.next();)if(null!=g.getValue("sys_class_name")){var c=new GlideRecord(g.getValue("sys_class_name"));c.get(g.sys_id),f.push({name:g.getValue("sys_update_name"),payload:s.serialize(c)})}var i=(new GlideSysAttachment).write(current,"update_set.json","application/json",JSON.stringify(f));]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-13 04:06:27</sys_created_on>
+        <sys_id>c18d5e392f2230107f6790bcf699b6f8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Validation Report Run</sys_name>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_update_name>sysauto_script_c18d5e392f2230107f6790bcf699b6f8</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-13 04:06:27</sys_updated_on>
+        <time_zone/>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+</record_update>

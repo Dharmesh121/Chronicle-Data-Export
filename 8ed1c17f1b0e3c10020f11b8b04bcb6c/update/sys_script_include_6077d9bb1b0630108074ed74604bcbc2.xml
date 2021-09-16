@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_cdsp_chr_data_ex.ChronicleRESTHandler</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>ChronicleRESTHandler</name>
+        <script><![CDATA[var ChronicleRESTHandler = Class.create();
+ChronicleRESTHandler.prototype = {
+    initialize: function() {},
+    /**
+     * To make REST call.
+     * @param {object} api object of Request containing headers, body and all parameters
+     */
+    _makeRESTCall: function(requestBody, baseURL, maxRetry, retryInterval) {
+
+        // Fetching maximum retry value from system property to perform for failed api call
+        var MAX_RETRY_COUNT = maxRetry;
+        var retryCount = 0;
+        var failed = false;
+        var response = null;
+        var ITSMRestHandler = new x_cdsp_chroni_itsm.ChronicleRESTHandler();
+        var authResponse = ITSMRestHandler.getAuthToken(gs.getProperty('x_cdsp_chr_data_ex.auth_scope'));
+        var access_token = authResponse.accessToken;
+
+        var api = new sn_ws.RESTMessageV2();
+        api.setEndpoint(baseURL + '/v1/unstructuredlogentries');
+        api.setHttpMethod('POST');
+        api.setRequestHeader('Accept', 'application/json');
+        api.setRequestHeader('Content-Type', 'application/json');
+        api.setRequestHeader('Authorization', access_token);
+        api.setRequestBody(JSON.stringify(requestBody));
+        try {
+            do {
+                response = this._retrieveResponse(api);
+                if (!response) {
+                    return null;
+                }
+                if (response.responseStatus == 429) {
+                    failed = true;
+
+                    // Get wait time between each retry.
+                    var waitTime = retryInterval;
+                    this._sleep(waitTime);
+					
+                } else {
+                    failed = false;
+                }
+                retryCount++;
+            } while (failed && retryCount < MAX_RETRY_COUNT);
+            if (failed)
+                throw "Couldn't retrieve response after " + MAX_RETRY_COUNT + " retries.";
+        } catch (ex) {
+            gs.error('Error occurred while retrieving the response from REST handler. Exception: ' + ex);
+        }
+        return response;
+    },
+
+    /**
+     * Retrieve response from given RESTMessageV2 object.
+     * 
+     * @param {Object} api for which API response is to be retrieved
+     * @returns {Object} Response body and status code. 
+     */
+    _retrieveResponse: function(api) {
+        var response = api.executeAsync();
+
+        var responseBody = response.getBody();
+        var responseStatus = response.getStatusCode();
+        if (responseStatus != 200 && !responseBody) {
+            return null;
+        }
+        return {
+            responseBody: responseBody,
+            responseStatus: responseStatus
+        };
+    },
+
+
+    /**
+     * Perform blocking sleep.
+     *
+     * @param {int} ms Time to sleep for in ms.
+     */
+    _sleep: function(sec) {
+        gs.info('[_sleep] Sleeping for ' + sec + 'seconds');
+        var endAt = new Date().getTime() + sec,
+            currentTime;
+        do {
+            currentTime = new Date().getTime();
+        } while (currentTime < endAt);
+    },
+
+    type: 'ChronicleRESTHandler'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-08-25 07:38:37</sys_created_on>
+        <sys_id>6077d9bb1b0630108074ed74604bcbc2</sys_id>
+        <sys_mod_count>11</sys_mod_count>
+        <sys_name>ChronicleRESTHandler</sys_name>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_update_name>sys_script_include_6077d9bb1b0630108074ed74604bcbc2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-15 07:25:32</sys_updated_on>
+    </sys_script_include>
+</record_update>

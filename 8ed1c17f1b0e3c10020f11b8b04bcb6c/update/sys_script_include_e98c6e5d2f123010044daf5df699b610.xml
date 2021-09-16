@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_cdsp_chr_data_ex.ChronicleUtils</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>ChronicleUtils</name>
+        <script><![CDATA[var ChronicleUtils = Class.create();
+ChronicleUtils.prototype = {
+    initialize: function() {},
+
+    /**
+     * To get Initial/Chckpoint Expor Time.
+     * 
+     * @param: current - Current configuration record.
+     * @returns: {dictionary} - initial/checkpoint export time for respective data export
+     */
+    getInitialExportTime: function(current, monitorId) {
+
+        try {
+            var cmdbCheckpoint;
+            var auditLogsCheckpoint;
+            var usersCheckpoint;
+
+            // CMDB Checkpoint
+            if (current.cmdb_checkpoint) {
+                cmdbCheckpoint = current.getValue('cmdb_checkpoint');
+            } else {
+                cmdbCheckpoint = current.getValue('initial_cmdb_export_time');
+            }
+
+            // Audit Logs Checkpoint
+            if (current.audit_logs_checkpoint) {
+                auditLogsCheckpoint = current.getValue('audit_logs_checkpoint');
+            } else {
+                auditLogsCheckpoint = current.getValue('initial_audit_logs_export_time');
+            }
+
+            // Users Checkpoint
+            if (current.users_checkpoint) {
+                usersCheckpoint = current.getValue('users_checkpoint');
+            } else {
+                usersCheckpoint = current.getValue('initial_users_export_time');
+            }
+
+            return {
+                cmdbCheckpoint: cmdbCheckpoint,
+                auditLogsCheckpoint: auditLogsCheckpoint,
+                usersCheckpoint: usersCheckpoint
+            };
+
+        } catch (ex) {
+            gs.error("[getInitialExportTime] Exception: " + ex);
+			if (!this.updateProcessMonitor(monitorId, "Failed","[getInitialExportTime] Exception: " + ex, true)){
+				return false;	
+			}
+			return null;
+        }
+    },
+
+    /**
+     * Set the Checkpoint Time to current Time.  
+     * @param: checkpointName - Checkpoint Field Name
+     * @return - None
+     */
+    updateCheckpoint: function(checkpointName, startTime) {
+        try {
+            var gr = new GlideRecord('x_cdsp_chr_data_ex_configuration');
+            gr.query();
+
+            if (gr.next()) {
+                gr.setValue(checkpointName, startTime);
+                gr.update();
+                gr.query();
+            }
+
+        } catch (ex) {
+            gs.error("[UpdateCheckpoint Script Include] Exception: " + ex);
+        }
+    },
+
+
+    /**
+     * To get number of records that will be pushed to Chronicle.
+     * 
+     * @param {string} table Table name .
+     * @returns {Number} Number of records
+     */
+    getNumberofRecords: function(table, startTime, checkpoint) {
+        try {
+            // 			To get the maximum count of records after applying the filtered query
+
+            var ga = new GlideAggregate(table);
+            ga.addAggregate('COUNT');
+
+            if (table == 'syslog_transaction') {
+                ga.addEncodedQuery('sys_created_on>=javascript:gs.dateGenerate(' + "'" + checkpoint + "'" + ')');
+                ga.addEncodedQuery('sys_created_on<javascript:gs.dateGenerate(' + "'" + startTime + "'" + ')');
+            } else {
+                ga.addEncodedQuery('sys_updated_on>=javascript:gs.dateGenerate(' + "'" + checkpoint + "'" + ')^ORsys_created_on>=javascript:gs.dateGenerate(' + "'" + checkpoint + "'" + ')');
+                ga.addEncodedQuery('sys_updated_on<javascript:gs.dateGenerate(' + "'" + startTime + "'" + ')^ORsys_created_on<javascript:gs.dateGenerate(' + "'" + startTime + "'" + ')');
+            }
+            ga.query();
+
+            var maxRecords = 0;
+            if (ga.next()) {
+                maxRecords = ga.getAggregate('COUNT');
+            }
+            return maxRecords;
+        } catch (ex) {
+            gs.error("[getNumberofRecords] Exception occured while getting maximum records. Exception: " + ex);
+        }
+
+    },
+
+    /**
+     * Extrat Table Data and create Request Body
+     * @param: gr - GlideRecord 
+     * @param: requestBody - Data To Export 
+     */
+    createRequestBody: function(gr, requestBody, monitorId) {
+        try {
+            while (gr.next()) {
+                var single_item = {};
+                for (var key in gr) {
+                    if (gr.getDisplayValue(key)) {
+                        single_item[key] = (gr.getDisplayValue(key));
+                    }
+                }
+                requestBody.entries.push({ "log_text": JSON.stringify(single_item) });
+            }
+			return requestBody;
+        } catch (ex) {
+            gs.error("[createRequestBody] Exception occured while creating request body. Exception: " + ex);
+			if (!this.updateProcessMonitor(monitorId, "Failed","[createRequestBody] Exception occured while creating request body. Exception: " + ex, true)){
+				return false;	
+			}
+			return null;
+        }
+    },
+
+
+    /**
+     * Update process monitor.  
+     * @param: monitorId - Sys Id of process monitor record
+     * @param: status - Status to update in process monitor
+     * @param: description - description to update in process monitor record
+     * @return - None
+     */
+    updateProcessMonitor: function(monitorId, status, description, endTime) {
+        try {
+            var gr = new GlideRecord('x_cdsp_chr_data_ex_process_monitor');
+
+            if (gr.get(monitorId)) {
+                gr.status = status;
+                gr.description += '\n' + '[' + new GlideDateTime().getDisplayValue() + '] ' + description;
+                if (endTime) {
+                    gr.end_time = new GlideDateTime();
+                }
+
+                if (!gr.update()) {
+                    gs.error("[updateProcessMonitor] Error occurred while updating the Process Monitor record having the sys_id " + monitorId);
+					return false;
+                }
+				return true;
+            } else {
+                gs.error("[updateProcessMonitor] Process Monitor record not found having sys_id " + monitorId);
+				return false;
+            }
+
+        } catch (ex) {
+            gs.error('[updateProcessMonitor] Exception occured while updating process monitor. Exception: ' + ex);
+			return false;
+        }
+
+    },
+
+    /**
+     * Update process monitor.  
+     * @param: monitorId - Sys Id of process monitor record
+     * @return - True/False True is job is terminated(status = Failed);
+     */
+
+    checkJobStatus: function(monitorId) {
+        try {
+            var processGr = new GlideRecord('x_cdsp_chr_data_ex_process_monitor');
+            if (processGr.get(monitorId)) {
+                return (processGr.status == 'Failed');
+            } else {
+                gs.error("[updateProcessMonitor] Process Monitor record not found having sys_id " + monitorId);
+            }
+
+        } catch (ex) {
+            gs.error('[checkJobStatus] Exception occured while fetching job status. Exception: ' + ex);
+        }
+
+    },
+
+    /**
+     * Update process monitor.  
+     * @object: gr - Glide object of configuration record
+     * @return - logTypes array consisting log types to be export
+     */
+
+    getLogTypestoExport: function(gr) {
+        try {
+            var logTypes = [];
+            if (gr.export_cmdb_tables) {
+                logTypes.push('CMDB');
+            }
+            if (gr.export_audit_logs) {
+                logTypes.push('Audit Logs');
+            }
+            if (gr.export_users) {
+                logTypes.push('Users');
+            }
+            return logTypes;
+
+        } catch (ex) {
+            gs.error('[getLogTypestoExport Exception occured while getting logtypes. Ex: ' + ex);
+        }
+    },
+
+
+    type: 'ChronicleUtils'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-08-30 05:40:17</sys_created_on>
+        <sys_id>e98c6e5d2f123010044daf5df699b610</sys_id>
+        <sys_mod_count>79</sys_mod_count>
+        <sys_name>ChronicleUtils</sys_name>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_update_name>sys_script_include_e98c6e5d2f123010044daf5df699b610</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-15 12:51:20</sys_updated_on>
+    </sys_script_include>
+</record_update>

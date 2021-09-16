@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description/>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_cdsp_chr_data_ex.data_export_scheduler_sys_id</name>
+        <read_roles>x_cdsp_chr_data_ex.admin</read_roles>
+        <suffix>data_export_scheduler_sys_id</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-08 07:59:12</sys_created_on>
+        <sys_id>c0b261dc2f6630107f6790bcf699b628</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>x_cdsp_chr_data_ex.data_export_scheduler_sys_id</sys_name>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_update_name>sys_properties_c0b261dc2f6630107f6790bcf699b628</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-13 03:51:26</sys_updated_on>
+        <type>string</type>
+        <value>f1c8d5182f6630107f6790bcf699b6b9</value>
+        <write_roles>x_cdsp_chr_data_ex.admin</write_roles>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=c0b261dc2f6630107f6790bcf699b628"/>
+</record_update>

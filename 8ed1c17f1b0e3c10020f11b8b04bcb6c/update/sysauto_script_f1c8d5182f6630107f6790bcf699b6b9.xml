@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <entered_time>1970-01-01 00:00:00</entered_time>
+        <name>Export Data</name>
+        <offset/>
+        <offset_type/>
+        <run_as/>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_period/>
+        <run_start>2021-09-08 07:15:15</run_start>
+        <run_time>1970-01-01 08:00:00</run_time>
+        <run_type>daily</run_type>
+        <script><![CDATA[/**
+ * Validate system property value. Give log message and return false for invalid value.
+ * 
+ * @param: sysPropertyName - System property name.
+ * @returns: false - Only if invalid system property value.
+ * @returns: sysPropertyValue - System property value [Only if valid].
+ */
+function validateSystemProperty(sysPropertyName) {
+
+    try {
+        var originalValue = gs.getProperty(sysPropertyName);
+        var sysPropertyValue = parseInt(originalValue);
+
+        if (sysPropertyValue <= 0 || isNaN(sysPropertyValue) || String(parseInt(sysPropertyValue)) != originalValue) {
+            gs.info("Invalid " + sysPropertyName + " value: " + originalValue + "\nValue should be positive integer");
+            return false;
+        }
+
+        return sysPropertyValue;
+    } catch (ex) {
+        gs.error("[validateSystemProperty] Exception occured while validating system properties. Exception: " + ex);
+    }
+
+}
+
+
+try {
+    var utils = new ChronicleUtils();
+    var grConfig = new GlideRecord('x_cdsp_chr_data_ex_configuration');
+    grConfig.setLimit(1);
+    grConfig.query();
+    if (grConfig.next()) {
+        var logTypes = utils.getLogTypestoExport(grConfig);
+        var startTime = new GlideDateTime();
+        var hasError = false;
+
+        // Validate system properties
+        var maxRecordsPerBatch = validateSystemProperty('x_cdsp_chr_data_ex.max_records_per_batch');
+        var maxRecordsPerAPICall = validateSystemProperty('x_cdsp_chr_data_ex.max_records_per_api_call');
+        var maxRetry = validateSystemProperty('x_cdsp_chr_data_ex.max_retries');
+        var retryInterval = validateSystemProperty('x_cdsp_chr_data_ex.retry_interval');
+
+        // If valid system properties, then only export data.
+        if (maxRecordsPerBatch && maxRecordsPerAPICall && maxRetry && retryInterval) {
+
+            var sysProperties = {
+                "maxRecordsPerBatch": maxRecordsPerBatch,
+                "maxRecordsPerAPICall": maxRecordsPerAPICall,
+                "maxRetry": maxRetry,
+                "retryInterval": retryInterval
+            };
+
+            var processGr = new GlideRecord('x_cdsp_chr_data_ex_process_monitor');
+            processGr.initialize();
+            processGr.start_time = startTime;
+            processGr.status = "Initiated";
+            processGr.data_types = logTypes + ''; // Should be list data type
+            processGr.description = '[' + new GlideDateTime().getDisplayValue() + '] Data Export has been started';
+            var monitorId = processGr.insert();
+
+            if (!monitorId) {
+                gs.error("[Export Data scheduled script] Error occurred while creating a record in the Process Monitor.");
+            } else {
+
+                var CMDBTables = grConfig.select_cmdb;
+                var baseURL = grConfig.getValue('base_url').trim();
+                var customerID = grConfig.getValue('customer_id').trim();
+
+                // Get the initial data export time
+                var checkpoint = utils.getInitialExportTime(grConfig, monitorId);
+
+                // Prevent data export
+                if (checkpoint == null || checkpoint == false) {
+                    hasError = true;
+                }
+
+                // Export CMDB data
+                if (!hasError && grConfig.export_cmdb_tables) {
+                    var cmdbExport = new ChronicleExportCMDB();
+                    if (!cmdbExport.exportCMDBtables(baseURL, customerID, monitorId, CMDBTables, startTime, checkpoint.cmdbCheckpoint, sysProperties))
+                        hasError = true;
+                }
+
+                // Export audit logs
+                if (!hasError && grConfig.export_audit_logs) {
+                    var auditLogsExport = new ChronicleExportAuditLogs();
+                    if (!auditLogsExport.exportAuditLogs(baseURL, customerID, monitorId, startTime, checkpoint.auditLogsCheckpoint, sysProperties))
+                        hasError = true;
+                }
+
+                //Export users(with groups & roles)
+                if (!hasError && grConfig.export_users) {
+                    var usersExport = new ChronicleExportUsers();
+                    if (!usersExport.exportUsers(baseURL, customerID, monitorId, startTime, checkpoint.usersCheckpoint, sysProperties));
+                    hasError = true;
+
+                }
+
+                if (!hasError) {
+                    utils.updateProcessMonitor(monitorId, 'Success', 'Exported data successfully', true);
+                }
+            }
+        }
+    } else {
+        var message = "Couldn't able to find configuration";
+        this.utils.updateProcessMonitor(monitorId, 'Failed', message, true);
+    }
+
+
+} catch (ex) {
+    gs.error("[Scheduled script execution] Exception: " + ex);
+}]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-08 07:15:43</sys_created_on>
+        <sys_id>f1c8d5182f6630107f6790bcf699b6b9</sys_id>
+        <sys_mod_count>79</sys_mod_count>
+        <sys_name>Export Data</sys_name>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_update_name>sysauto_script_f1c8d5182f6630107f6790bcf699b6b9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-16 06:28:05</sys_updated_on>
+        <time_zone/>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+</record_update>

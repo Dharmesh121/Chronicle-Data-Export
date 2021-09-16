@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="audit_logs_checkpoint" label="Audit Logs Checkpoint" language="en" table="x_cdsp_chr_data_ex_configuration">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>audit_logs_checkpoint</element>
+            <help/>
+            <hint/>
+            <label>Audit Logs Checkpoint</label>
+            <language>en</language>
+            <name>x_cdsp_chr_data_ex_configuration</name>
+            <plural>Audit Logs Checkpoints</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2021-09-08 06:50:41</sys_created_on>
+            <sys_id>ce23d1142f6630107f6790bcf699b662</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Audit Logs Checkpoint</sys_name>
+            <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+            <sys_update_name>sys_documentation_x_cdsp_chr_data_ex_configuration_audit_logs_checkpoint_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2021-09-08 06:50:41</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>false</advanced>
+        <condition/>
+        <description>Default access control on x_cdsp_chr_data_ex_process_monitor</description>
+        <name>x_cdsp_chr_data_ex_process_monitor</name>
+        <operation display_value="read">read</operation>
+        <script/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-13 03:47:48</sys_created_on>
+        <sys_id>fb3916752f2230107f6790bcf699b6a8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_cdsp_chr_data_ex_process_monitor</sys_name>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_update_name>sys_security_acl_fb3916752f2230107f6790bcf699b6a8</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-13 03:47:48</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+</record_update>

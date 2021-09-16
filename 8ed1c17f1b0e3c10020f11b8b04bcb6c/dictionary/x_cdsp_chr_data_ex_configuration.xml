@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Configuration" max_length="40" name="x_cdsp_chr_data_ex_configuration" sizeclass="1" type="collection">
+        <element label="Audit Logs Checkpoint" max_length="100" name="audit_logs_checkpoint" read_only="true" type="string"/>
+        <element default="https://malachiteingestion-pa.googleapis.com" label="Base URL" mandatory="true" max_length="200" name="base_url" type="string"/>
+        <element label="CMDB Checkpoint" max_length="100" name="cmdb_checkpoint" read_only="true" type="string"/>
+        <element label="Customer ID" mandatory="true" max_length="255" name="customer_id" type="password2"/>
+        <element label="Export Audit logs" max_length="40" name="export_audit_logs" type="boolean"/>
+        <element label="Export CMDB tables" max_length="40" name="export_cmdb_tables" type="boolean"/>
+        <element label="Export Users" max_length="40" name="export_users" type="boolean"/>
+        <element label="First Audit Logs Export Time" max_length="100" name="initial_audit_logs_export_time" type="glide_date_time"/>
+        <element label="First CMDB Export Time" max_length="40" name="initial_cmdb_export_time" type="glide_date_time"/>
+        <element label="First Users Export Time" max_length="40" name="initial_users_export_time" type="glide_date_time"/>
+        <element attributes="no_sort=true,slushbucket_ref_no_expand=true" label="Select CMDB Tables" max_length="255" name="select_cmdb" reference="sys_db_object" reference_qual="javascript: 'nameIN' +new GlideTableHierarchy(&quot;cmdb_ci&quot;).getTableExtensions()" type="glide_list" use_reference_qualifier="advanced"/>
+        <element label="Users Checkpoint" max_length="100" name="users_checkpoint" read_only="true" type="string"/>
+    </element>
+</database>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_action">
+    <sys_ui_action action="INSERT_OR_UPDATE">
+        <action_name/>
+        <active>true</active>
+        <client>false</client>
+        <client_script_v2><![CDATA[function onClick(g_form) {
+
+}]]></client_script_v2>
+        <comments/>
+        <condition/>
+        <form_action>true</form_action>
+        <form_button>true</form_button>
+        <form_button_v2>false</form_button_v2>
+        <form_context_menu>false</form_context_menu>
+        <form_link>false</form_link>
+        <form_menu_button_v2>false</form_menu_button_v2>
+        <form_style/>
+        <hint/>
+        <isolate_script>false</isolate_script>
+        <list_action>false</list_action>
+        <list_banner_button>false</list_banner_button>
+        <list_button>false</list_button>
+        <list_choice>false</list_choice>
+        <list_context_menu>false</list_context_menu>
+        <list_link>false</list_link>
+        <list_save_with_form_button>false</list_save_with_form_button>
+        <list_style/>
+        <messages/>
+        <name>Export Data</name>
+        <onclick/>
+        <order>100</order>
+        <script><![CDATA[
+var ans = current.update();
+
+if (ans) {
+	var gr = new GlideRecord("x_cdsp_chr_data_ex_process_monitor");
+
+	gr.addQuery('status', '!=', 'Success');
+	gr.addQuery('status', '!=', 'Failed');
+	gr.setLimit(1);
+	gr.query();
+	if (gr.hasNext()) {
+		gs.addErrorMessage("One process is already running. Multiple data export process are not allowed.");
+	} else {
+		var data_export_script = new GlideRecord('sysauto_script');
+		if (data_export_script.get(
+			gs.getProperty('x_cdsp_chr_data_ex.data_export_scheduler_sys_id'))) {
+			gs.executeNow(data_export_script);
+			gs.addInfoMessage("Data Export has been started");
+			gs.info("[Export Data] Data Export has been started");
+		}
+	}
+	gs.setRedirect(current.getLink(true));
+}]]></script>
+        <show_insert>false</show_insert>
+        <show_multiple_update>false</show_multiple_update>
+        <show_query>false</show_query>
+        <show_update>true</show_update>
+        <sys_class_name>sys_ui_action</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-08 07:06:30</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>b78699942f6630107f6790bcf699b6d7</sys_id>
+        <sys_mod_count>45</sys_mod_count>
+        <sys_name>Export Data</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_update_name>sys_ui_action_b78699942f6630107f6790bcf699b6d7</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-15 06:30:03</sys_updated_on>
+        <table>x_cdsp_chr_data_ex_configuration</table>
+        <ui11_compatible>true</ui11_compatible>
+        <ui16_compatible>false</ui16_compatible>
+    </sys_ui_action>
+</record_update>

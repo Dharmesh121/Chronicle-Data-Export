@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_cdsp_chr_data_ex.ChronicleExportUsers</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>ChronicleExportUsers</name>
+        <script><![CDATA[var ChronicleExportUsers = Class.create();
+ChronicleExportUsers.prototype = {
+    initialize: function() {
+        this.utils = new ChronicleUtils();
+    },
+
+    /**
+     * Prepare users array containing users sys_id.
+     * 
+     * @param: usersCheckpoint - Checkpoint time upto which data was exported successful to Chronicle Platform during previous export.
+     * @returns: user - users(sys_id) which is to be exported. 
+     */
+    getUpdatedUserSysID: function(startTime, usersCheckpoint) {
+        try {
+            // Retrive user's sys_id for updated roles
+            var updatedRoleUserID = {};
+            var grUserRole = new GlideRecord('sys_user_has_role');
+
+            grUserRole.addEncodedQuery('sys_updated_on>=javascript:gs.dateGenerate(' + "'" + usersCheckpoint + "'" + ')^ORsys_created_on>=javascript:gs.dateGenerate(' + "'" + usersCheckpoint + "'" + ')');
+			grUserRole.addEncodedQuery('sys_updated_on<javascript:gs.dateGenerate(' + "'" + startTime + "'" + ')^ORsys_created_on<javascript:gs.dateGenerate(' + "'" + startTime + "'" + ')');
+			
+            grUserRole.query();
+
+            // Remove duplicate
+            while (grUserRole.next()) {
+                if (grUserRole.user.name) {
+                    updatedRoleUserID[grUserRole.user] = "";
+                }
+            }
+
+            // Retrive user's unique sys id
+            var temp_updatedRoleUserID = [];
+            for (var id in updatedRoleUserID) {
+                temp_updatedRoleUserID.push(id);
+            }
+
+            // Retrive user's sys_id for updated group members
+            var match = false;
+            var grMbrUpdatedUserID = new GlideRecord('sys_user_grmember');
+			
+            grMbrUpdatedUserID.addEncodedQuery('sys_updated_on>=javascript:gs.dateGenerate(' + "'" + usersCheckpoint + "'" + ')^ORsys_created_on>=javascript:gs.dateGenerate(' + "'" + usersCheckpoint + "'" + ')');
+			grMbrUpdatedUserID.addEncodedQuery('sys_updated_on<javascript:gs.dateGenerate(' + "'" + startTime + "'" + ')^ORsys_created_on<javascript:gs.dateGenerate(' + "'" + startTime + "'" + ')');
+			
+            grMbrUpdatedUserID.query();
+
+            while (grMbrUpdatedUserID.next()) {
+                for (var i in temp_updatedRoleUserID) {
+					match = false;
+                    if (grMbrUpdatedUserID.user == temp_updatedRoleUserID[i]) {
+                        match = true;
+						break;
+                    }
+                }
+                if (!match) {
+                    temp_updatedRoleUserID.push(grMbrUpdatedUserID.user);
+                }
+            }
+
+            // Retrive users sys_id from sys_user
+            var user = [];
+            var grUser = new GlideRecord('sys_user');
+            grUser.addEncodedQuery('sys_updated_on>=javascript:gs.dateGenerate(' + "'" + usersCheckpoint + "'" + ')^ORsys_created_on>=javascript:gs.dateGenerate(' + "'" + usersCheckpoint + "'" + ')');
+            grUser.query();
+
+            while (grUser.next()) {
+                user.push(grUser.getValue('sys_id'));
+            }
+
+            // Merge users sys_id and remove duplicate user's sys_id 
+            for (var j in temp_updatedRoleUserID) {
+				match = false;
+                for (i in user) {
+                    if (temp_updatedRoleUserID[j] == user[i]) {
+                        match = true;
+						break;
+                    }
+                }
+                if (!match) {
+                    user.push(temp_updatedRoleUserID[j]);
+                }
+            }
+            return user;
+        } catch (ex) {
+            gs.error("[getUpdatedUserSysID] Exception occured while getting users sys_id: " + ex.msg);
+        }
+    },
+
+    /**
+     * Prepare users(with groups & roles) request body and export to Chronicle.
+     * 
+     * @param: baseURL - base url for all the API calls made to chronicle.
+     * @param: customerID - Chronicle instance customer ID.
+     * @param: monitorId - .
+     * @param: startTime - .
+     * @param: usersCheckpoint - Checkpoint time upto which data was exported successful to Chronicle Platform during previous export.
+     * @returns: None. 
+     */
+    exportUsers: function(baseURL, customerID, monitorId, startTime, usersCheckpoint, sysProperties) {
+        try {
+			// Array of user's sys_id's
+            var user = this.getUpdatedUserSysID(startTime, usersCheckpoint);
+			
+            if(!this.utils.updateProcessMonitor(monitorId, 'Exporting', 'Started exporting Users data'))
+				return;
+            var requestBody = {
+                "log_type": "SERVICENOW_ROLES",
+                "entries": []
+            };
+
+            var hasError = false;
+            var utils = new ChronicleUtils();
+            var grSysUsersGroup;
+            var usersSysID;
+            var groupSysID;
+
+            var maxRecords = user.length;
+            var recordsPerAPICall = sysProperties.maxRecordsPerAPICall;
+            var recordsPerBatch = sysProperties.maxRecordsPerBatch;
+
+            if (maxRecords > recordsPerBatch) {
+                maxRecords = recordsPerBatch;
+            }
+
+            // ----To send Test User02 record only------
+            // user = ["53b280da2f2230107f6790bcf699b662"];
+            // -----------------------------------------
+
+            var recordIndex = 0;
+            while (true) {
+
+                if (recordIndex >= maxRecords) {
+                    break;
+                }
+
+				var records;
+                var perAPIuser;
+                /* Slice only 10000 records */
+                if (maxRecords - recordIndex >= recordsPerAPICall) {
+                    perAPIuser = user.slice(recordIndex, recordIndex + recordsPerAPICall);
+					records = recordsPerAPICall;
+                } else {
+                    perAPIuser = user.slice(recordIndex, maxRecords);
+					records = Math.abs(recordIndex - maxRecords);
+                }
+
+				// Create request body
+                // Parsing through each sys_user GlideRecord
+                for (var idx in perAPIuser) {
+
+                    var grSysUsers = new GlideRecord('sys_user');
+                    grSysUsers.addQuery('sys_id', perAPIuser[idx]);
+                    grSysUsers.query();
+                    grSysUsers.next();
+
+                    // Contains single record
+                    var single_item = {};
+
+                    // ---- User information
+                    for (key in grSysUsers) {
+                        if (grSysUsers.getDisplayValue(key)) {
+
+                            if (key == 'user_password') {
+                                continue;
+                            }
+                            // Get user info
+                            single_item[key] = grSysUsers.getDisplayValue(key);
+                        }
+                    }
+
+                    // ---- User roles
+                    // Get current user sys_id
+					usersSysID = perAPIuser[idx];
+
+                    var grSysUsersHasRole = new GlideRecord('sys_user_has_role');
+                    grSysUsersHasRole.addQuery('user', usersSysID);
+                    grSysUsersHasRole.query();
+
+                    // Contains current user roles and added to single_item
+                    var usersRole = [];
+
+                    // Fetching current user roles
+                    while (grSysUsersHasRole.next()) {
+                        usersRole.push(String(grSysUsersHasRole.role.name));
+                    }
+
+                    // Add current user roles to single_item
+                    single_item["users_roles"] = usersRole;
+                   
+
+                    // ---- User group and group roles
+                    grSysUsersGroup = new GlideRecord('sys_user_grmember');
+                    grSysUsersGroup.addQuery('user', usersSysID);
+                    grSysUsersGroup.query();
+					
+                    var usersGroup = [];
+                    var temp = {};
+
+                    // Fetching current users groups and group roles
+                    while (grSysUsersGroup.next()) {
+						
+                        temp["group_name"] = String(grSysUsersGroup.group.name);
+                        groupSysID = grSysUsersGroup.getValue('group');
+
+                        var grSysGroupHasRole = new GlideRecord('sys_group_has_role');
+                        grSysGroupHasRole.addQuery('group', groupSysID);
+                        grSysGroupHasRole.query();
+
+                        // Contains current user group roles
+                        var groupRole = [];
+
+                        // Fetching group roles of current user
+                        while (grSysGroupHasRole.next()) {
+                            groupRole.push(String(grSysGroupHasRole.role.name));
+                        }
+
+                        temp["group_roles"] = groupRole;
+                        usersGroup.push(temp);
+                        temp = {};
+
+                    }
+
+                    // Add current user groups to single_item
+                    single_item["users_group"] = (usersGroup);
+					
+                    requestBody.entries.push({"log_text": JSON.stringify(single_item)});
+
+                    // --++-PRINT CREATED PAYLOAD-++
+                    // gs.info(requestBody["entries"][0]["log_text"]["user_group"]);
+                    // gs.info("=======> Request Body: " + requestBody["entries"][0]["log_text"]);
+                    // --++--++--++--++--++--++--++
+
+                    // Empty current user group sys_id to take next user group sys_id
+                    groupSysID = [];
+                }
+
+                gs.info('payload of batch create: ' + JSON.stringify(requestBody));
+
+                var restHandler = new ChronicleRESTHandler();
+
+                var response = restHandler._makeRESTCall(requestBody, baseURL, sysProperties.maxRetry, sysProperties.retryInterval);
+				
+                gs.info("temp response status of POST api call: " + response.responseStatus);
+
+                if (response.responseStatus != 200) {
+                    var message = 'Error occured while making POST API call to Chronicle with status code: ' + response.responseStatus;
+                    if(!this.utils.updateProcessMonitor(monitorId, 'Failed', message, true))
+						return false;
+                    gs.error('[exportUsers] ' + message);
+                    return false;
+                }
+				message = "Exported " + records + " Users(with Groups & Roles) logs successfully";
+                    this.utils.updateProcessMonitor(monitorId, 'Exporting', message);
+                    gs.info('[ExporUsers] ' + message);
+                    recordIndex += recordsPerAPICall;
+                    requestBody.entries = [];
+
+            }
+            if (!hasError) {
+                message = "Exported " + maxRecords + " numbers of Users(with Groups & Roles) records successfully to Chronicle platform.";
+                if(!this.utils.updateProcessMonitor(monitorId, 'Exporting', message))
+					return false;
+                gs.info('[ExporUsers] ' + message);
+
+                //Update checkpoint
+                this.utils.updateCheckpoint('users_checkpoint', startTime);
+				return true;
+            }
+
+        } catch (ex) {
+            message = 'Exception occured while exporting Users(with Groups & Roles) data. Exception: ' + ex;
+            if(!this.utils.updateProcessMonitor(monitorId, 'Failed', message, true))
+				return false;
+            gs.error('[ExporUsers] ' + message);
+			return false;
+        }
+
+    },
+
+    type: 'ChronicleExportUsers'
+
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-08-30 11:39:24</sys_created_on>
+        <sys_id>81cef3d12f163010044daf5df699b64b</sys_id>
+        <sys_mod_count>93</sys_mod_count>
+        <sys_name>ChronicleExportUsers</sys_name>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_update_name>sys_script_include_81cef3d12f163010044daf5df699b64b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-15 11:10:49</sys_updated_on>
+    </sys_script_include>
+</record_update>

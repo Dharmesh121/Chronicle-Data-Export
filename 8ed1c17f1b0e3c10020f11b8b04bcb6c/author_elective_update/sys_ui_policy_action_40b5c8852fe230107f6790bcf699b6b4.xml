@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action">
+    <sys_ui_policy_action action="DELETE">
+        <cleared>false</cleared>
+        <disabled>true</disabled>
+        <field>initial_users_export_time</field>
+        <mandatory>ignore</mandatory>
+        <sys_class_name>sys_ui_policy_action</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-10 09:07:55</sys_created_on>
+        <sys_id>40b5c8852fe230107f6790bcf699b6b4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>initial_users_export_time</sys_name>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_update_name>sys_ui_policy_action_40b5c8852fe230107f6790bcf699b6b4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-10 09:07:55</sys_updated_on>
+        <table>x_cdsp_chr_data_ex_configuration</table>
+        <ui_policy display_value="Make first users export time field read-only">1255c4852fe230107f6790bcf699b6a4</ui_policy>
+        <visible>ignore</visible>
+    </sys_ui_policy_action>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</application>
+        <file_path/>
+        <instance_id>9e948971dbd94c908aea21c4059619c0</instance_id>
+        <instance_name>dev95225</instance_name>
+        <name>sys_ui_policy_action_40b5c8852fe230107f6790bcf699b6b4</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action"><sys_ui_policy_action action="INSERT_OR_UPDATE"><cleared>false</cleared><disabled>true</disabled><field>initial_users_export_time</field><mandatory>ignore</mandatory><sys_class_name>sys_ui_policy_action</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2021-09-10 09:07:55</sys_created_on><sys_id>40b5c8852fe230107f6790bcf699b6b4</sys_id><sys_mod_count>0</sys_mod_count><sys_name>initial_users_export_time</sys_name><sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package><sys_policy/><sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope><sys_update_name>sys_ui_policy_action_40b5c8852fe230107f6790bcf699b6b4</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2021-09-10 09:07:55</sys_updated_on><table>x_cdsp_chr_data_ex_configuration</table><ui_policy display_value="Make first users export time field read-only">1255c4852fe230107f6790bcf699b6a4</ui_policy><visible>ignore</visible></sys_ui_policy_action></record_update>]]></payload>
+        <payload_hash>1410720888</payload_hash>
+        <record_name>initial_users_export_time</record_name>
+        <reverted_from/>
+        <source>1967dee02fa270107f6790bcf699b676</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-10 09:07:55</sys_created_on>
+        <sys_id>3fb5c8852fe230107f6790bcf699b6e3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17bcef6a3d40000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-10 09:07:55</sys_updated_on>
+        <type>UI Policy Action</type>
+        <update_guid>77b5c88582e23010faf543c28cbf43e3</update_guid>
+        <update_guid_history>77b5c88582e23010faf543c28cbf43e3:1410720888</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-10 09:10:08</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_policy_action">sys_ui_policy_action</sys_db_object>
+        <sys_id>21ba6cf46bf647b6931458df64a45444</sys_id>
+        <sys_metadata>40b5c8852fe230107f6790bcf699b6b4</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>initial_users_export_time</sys_name>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_scope_delete display_value="">006152519b904b9480023041154796a9</sys_scope_delete>
+        <sys_update_name>sys_ui_policy_action_40b5c8852fe230107f6790bcf699b6b4</sys_update_name>
+        <sys_update_version display_value="sys_ui_policy_action_40b5c8852fe230107f6790bcf699b6b4">3fb5c8852fe230107f6790bcf699b6e3</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-10 09:10:08</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

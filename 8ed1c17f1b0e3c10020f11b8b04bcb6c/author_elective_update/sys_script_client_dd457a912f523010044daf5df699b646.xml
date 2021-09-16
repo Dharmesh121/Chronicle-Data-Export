@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="DELETE">
+        <active>false</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description>Validate Base URL</description>
+        <field>active</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Validate Base URL</name>
+        <order/>
+        <script><![CDATA[function onSubmit() {
+	
+//     var rex = new RegExp('^(https|http)\:\/\/[a-zA-Z]+\-[a-zA-Z]+\.googleapis\.[a-z]+');
+	var rex = new RegExp('/(\b^((http)|(https)):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])\.(([a-zA-Z]{2,10}\/\S*$)|([a-zA-Z]{2,10})$)/gim');
+	
+    var str = g_form.getValue('base_url');
+   
+    if (!rex.test(str)) {
+        g_form.showFieldMsg("base_url", "Invalid Base URL", "error");
+		return false;
+    }
+	
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-08-30 06:24:55</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>dd457a912f523010044daf5df699b646</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Validate Base URL</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_update_name>sys_script_client_dd457a912f523010044daf5df699b646</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-10 06:37:55</sys_updated_on>
+        <table>x_cdsp_chr_data_ex_data_export_configuration</table>
+        <type>onSubmit</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</application>
+        <file_path/>
+        <instance_id>9e948971dbd94c908aea21c4059619c0</instance_id>
+        <instance_name>dev95225</instance_name>
+        <name>sys_script_client_dd457a912f523010044daf5df699b646</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_script_client"&gt;&lt;sys_script_client action="INSERT_OR_UPDATE"&gt;&lt;active&gt;false&lt;/active&gt;&lt;applies_extended&gt;false&lt;/applies_extended&gt;&lt;condition/&gt;&lt;description&gt;Validate Base URL&lt;/description&gt;&lt;field&gt;active&lt;/field&gt;&lt;global&gt;true&lt;/global&gt;&lt;isolate_script&gt;true&lt;/isolate_script&gt;&lt;messages/&gt;&lt;name&gt;Validate Base URL&lt;/name&gt;&lt;order/&gt;&lt;script&gt;&lt;![CDATA[function onSubmit() {
+	
+//     var rex = new RegExp('^(https|http)\:\/\/[a-zA-Z]+\-[a-zA-Z]+\.googleapis\.[a-z]+');
+	var rex = new RegExp('/(\b^((http)|(https)):\/\/[-A-Z0-9+&amp;@#\/%?=~_|!:,.;]*[-A-Z0-9+&amp;@#\/%=~_|])\.(([a-zA-Z]{2,10}\/\S*$)|([a-zA-Z]{2,10})$)/gim');
+	
+    var str = g_form.getValue('base_url');
+   
+    if (!rex.test(str)) {
+        g_form.showFieldMsg("base_url", "Invalid Base URL", "error");
+		return false;
+    }
+	
+}]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_client&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-08-30 06:24:55&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;dd457a912f523010044daf5df699b646&lt;/sys_id&gt;&lt;sys_mod_count&gt;3&lt;/sys_mod_count&gt;&lt;sys_name&gt;Validate Base URL&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex"&gt;8ed1c17f1b0e3c10020f11b8b04bcb6c&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Chronicle Data Export App"&gt;8ed1c17f1b0e3c10020f11b8b04bcb6c&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_client_dd457a912f523010044daf5df699b646&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-09-10 06:37:55&lt;/sys_updated_on&gt;&lt;table&gt;x_cdsp_chr_data_ex_data_export_configuration&lt;/table&gt;&lt;type&gt;onSubmit&lt;/type&gt;&lt;ui_type&gt;10&lt;/ui_type&gt;&lt;view/&gt;&lt;/sys_script_client&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-958729748</payload_hash>
+        <record_name>Validate Base URL</record_name>
+        <reverted_from/>
+        <source>1967dee02fa270107f6790bcf699b676</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-10 06:37:55</sys_created_on>
+        <sys_id>e263e77c2f6230107f6790bcf699b69b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17bce6d4e9e0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-10 06:37:55</sys_updated_on>
+        <type>Client Script</type>
+        <update_guid>ee63a77ca16230101fcb54dfe695704a</update_guid>
+        <update_guid_history>ee63a77ca16230101fcb54dfe695704a:-958729748,8b43ef3cff623010a1ef8dca54db9677:-721723239,1f4f9f78a06230104b52bb9dd43d1c36:-972735537,cdf63e912d52301056c8840874f3ab56:-682295114</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-10 08:04:45</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_client">sys_script_client</sys_db_object>
+        <sys_id>3d381d6cd78f4dd78e04bcf891f957f1</sys_id>
+        <sys_metadata>dd457a912f523010044daf5df699b646</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Validate Base URL</sys_name>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_parent display_value="">16c43dbf1b4630108074ed74604bcb3c</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_scope_delete display_value="">006152519b904b9480023041154796a9</sys_scope_delete>
+        <sys_update_name>sys_script_client_dd457a912f523010044daf5df699b646</sys_update_name>
+        <sys_update_version display_value="sys_script_client_dd457a912f523010044daf5df699b646">e263e77c2f6230107f6790bcf699b69b</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-10 08:04:45</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

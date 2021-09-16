@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_auth_profile_basic">
+    <sys_auth_profile_basic action="INSERT_OR_UPDATE">
+        <name>Test Auth</name>
+        <password>LyC/sNVsj1F7MaSa+EyjGA==</password>
+        <sys_class_name>sys_auth_profile_basic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-08-25 08:51:21</sys_created_on>
+        <sys_id>ab68e5771b4630108074ed74604bcbc9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Test Auth</sys_name>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_update_name>sys_auth_profile_basic_ab68e5771b4630108074ed74604bcbc9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-08-25 08:51:21</sys_updated_on>
+        <username>dharmesh.hadiyal</username>
+    </sys_auth_profile_basic>
+</record_update>

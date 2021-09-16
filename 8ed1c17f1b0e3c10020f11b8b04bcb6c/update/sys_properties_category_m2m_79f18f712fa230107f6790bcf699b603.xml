@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category_m2m">
+    <sys_properties_category_m2m action="INSERT_OR_UPDATE">
+        <category display_value="Chronicle Data Export App Properties">eaa143b12fa230107f6790bcf699b6da</category>
+        <order>100</order>
+        <property display_value="x_cdsp_chr_data_ex.max_records_per_api_call" name="x_cdsp_chr_data_ex.max_records_per_api_call">cefec5092fa630107f6790bcf699b651</property>
+        <sys_class_name>sys_properties_category_m2m</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-13 06:45:42</sys_created_on>
+        <sys_id>79f18f712fa230107f6790bcf699b603</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_cdsp_chr_data_ex.max_records_per_api_call.Chronicle Data Export App Categories</sys_name>
+        <sys_package display_value="Chronicle Data Export App" source="x_cdsp_chr_data_ex">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Chronicle Data Export App">8ed1c17f1b0e3c10020f11b8b04bcb6c</sys_scope>
+        <sys_update_name>sys_properties_category_m2m_79f18f712fa230107f6790bcf699b603</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-09-13 06:45:42</sys_updated_on>
+    </sys_properties_category_m2m>
+</record_update>
